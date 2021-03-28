@@ -65,5 +65,32 @@ router.route('/add').post( (req,res) => {
 
 
 });
+addAutomatedEntry = function(data){
+    //console.log(Date.parse(data.feedTime));
+    //we need to make sure that the date is correct in daily scheduling.
+    let newFeedDate = new Date(data.feedTime);
+    newFeedDate.setDate(new Date().getDate());
+    const username = data.username;
+    const feedTime =  Date.parse(newFeedDate);
+    const feedLocation =  data.feedLocation;
+    const foodType =  data.foodType;
+    const foodCategory =  data.foodCategory;
+    const numberOfDucks =  Number(data.numberOfDucks);
+    const foodQuantity =  Number(data.foodQuantity);
+    const newFeedInfo = new FeedInfo({
+        username,
+        feedTime,
+        feedLocation,
+        foodType,
+        foodCategory,
+        numberOfDucks,
+        foodQuantity
+    });
+    console.log('reached here');
+    newFeedInfo.save()
+        .then( () => console.log('Scheduled Feed Information submitted!'))
+        .catch( err => console.log('Error : '+ err));
 
-module.exports = router;
+}
+
+module.exports = {router,addAutomatedEntry};
