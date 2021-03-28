@@ -21,7 +21,6 @@ connection.once('open',()=>{
 })
 //const schedulingQueue = [];
 const schedulingQueue = require("./models/schedulerHelper");
-//use */10 * * * * * to run it every 10 sec
 cron.schedule('0 0 * * *',function(){
     console.log('job running every 5 sec!');
     let processingQueue = schedulingQueue.getSchedulingQueue();
@@ -41,7 +40,7 @@ const userRouter= require("./routes/users");
 const scheduleRouter= require("./routes/scheduler");
 app.use('/users',userRouter);
 app.use('/feeddata',feeddataRouter.router);
-app.use('/schedule',scheduleRouter);
+app.use('/schedules',scheduleRouter);
 
 
 
