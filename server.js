@@ -21,7 +21,8 @@ connection.once('open',()=>{
 })
 //const schedulingQueue = [];
 const schedulingQueue = require("./models/schedulerHelper");
-cron.schedule('*/10 * * * * *',function(){
+//use */10 * * * * * to run it every 10 sec
+cron.schedule('0 0 * * *',function(){
     console.log('job running every 5 sec!');
     let processingQueue = schedulingQueue.getSchedulingQueue();
     //console.log(processingQueue);
