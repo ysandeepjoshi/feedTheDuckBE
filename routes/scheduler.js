@@ -5,6 +5,7 @@ let scheduleHelper = require("../models/schedulerHelper");
 
 router.route('/delete').get((req,res)=>{
     let scheduleList = scheduleHelper.getSchedulingQueue();
+    //remove schedule task from array.
     if(scheduleList){
         console.log(scheduleList);
     }
@@ -13,6 +14,11 @@ Schedule.find()
     .then(schedules => res.json(schedules))
     .catch(err => res.status(400).json('Error : '+ err));
 });
+router.route('/').get((req,res)=>{
+    Schedule.find()
+        .then(schedules => res.json(schedules))
+        .catch(err => res.status(400).json('Error : '+ err));
+    });
 
 router.route('/add').post((req,res) => {
     const username = req.body.username;
