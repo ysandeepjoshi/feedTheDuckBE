@@ -38,6 +38,8 @@ cron.schedule('0 0 * * *',function(){
 const feeddataRouter= require("./routes/feeddata");
 const userRouter= require("./routes/users");
 const scheduleRouter= require("./routes/scheduler");
+const loginRouter= require("./routes/login");
+app.use('/login',loginRouter);
 app.use('/users',userRouter);
 app.use('/feeddata',feeddataRouter.router);
 app.use('/schedules',scheduleRouter);
