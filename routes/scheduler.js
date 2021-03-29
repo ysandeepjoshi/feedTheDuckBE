@@ -3,17 +3,18 @@ const router = require("express").Router();
 let Schedule = require("../models/scheduler.model");
 let scheduleHelper = require("../models/schedulerHelper");
 
-router.route('/delete').get((req,res)=>{
+router.route('/delete').post((req,res)=>{
     let scheduleList = scheduleHelper.getSchedulingQueue();
     //remove schedule task from array.
-    if(scheduleList){
-        console.log(scheduleList);
-    }
-const username = req.body.username;
-Schedule.find()
-    .then(schedules => res.json(schedules))
-    .catch(err => res.status(400).json('Error : '+ err));
-});
+let inputUsername = req.body.username;
+console.log(inputUsername);
+let filteredList = scheduleList.filter((item)=>item.username!==inputUsername)
+scheduleHelper.setSchedulingQueue(filteredList);
+Schedule.deleteOne({username:req.body.username})
+        .then(() => res.json('information deleted.'))
+        .catch(err => res.status(400).json('Error : '+ err));
+    })
+    
 router.route('/').get((req,res)=>{
     Schedule.find()
         .then(schedules => res.json(schedules))
